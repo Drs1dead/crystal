@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CrystaltWorld - Minecraft Server 1.21.1</title>
+    <style>
+        /* Enhanced iOS-inspired design with background image, more effects, cursor changes, and no layout shifts */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://thumbs.dreamstime.com/b/aerial-view-serene-minecraft-landscape-featuring-winding-stream-flowing-dense-forest-stream-s-crystal-435285288.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Parallax-like effect */
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            cursor: default;
+            transition: background 0.5s ease;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(15px);
+            padding: 25px;
+            text-align: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3em;
+            color: #007aff;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        header h1:hover {
+            color: #0056b3;
+            transform: rotate(2deg); /* Fun rotate */
+            cursor: pointer;
+        }
+
+        nav {
+            margin: 20px 0;
+        }
+
+        nav a {
+            margin: 0 20px;
+            text-decoration: none;
+            color: #007aff;
+            font-weight: bold;
+            transition: color 0.3s, transform 0.3s, box-shadow 0.3s;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(0, 122, 255, 0.1);
+        }
+
+        nav a:hover {
+            color: #0056b3;
+            transform: translateY(-2px) rotate(2deg);
+            background: rgba(0, 122, 255, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 122, 255, 0.3);
+            cursor: pointer;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 25px;
+            flex: 1;
+        }
+
+        section {
+            background: rgba(255, 255, 255, 0.95); /* Semi-transparent for background visibility */
+            border-radius: 30px;
+            padding: 25px;
+            margin-bottom: 40px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 122, 255, 0.2);
+            cursor: pointer;
+        }
+
+        h2 {
+            color: #007aff;
+            border-bottom: 2px solid #007aff;
+            padding-bottom: 12px;
+            border-radius: 0 0 10px 10px;
+            transition: color 0.3s;
+        }
+
+        h2:hover {
+            color: #0056b3;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            justify-items: center;
+        }
+
+        li {
+            background: rgba(0, 122, 255, 0.1);
+            margin: 0;
+            padding: 12px 20px;
+            border-radius: 20px;
+            text-align: center;
+            transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+            width: 100%;
+            max-width: 300px;
+            box-sizing: border-box;
+        }
+
+        li:hover {
+            transform: translateY(-2px); /* Lift instead of scale to avoid shifts */
+            background: rgba(0, 122, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 122, 255, 0.4);
+            cursor: pointer;
+        }
+
+        footer {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(15px);
+            padding: 15px;
+            text-align: center;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            font-size: 0.9em;
+            color: #666;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            transition: background 0.3s;
+        }
+
+        footer:hover {
+            background: rgba(0, 122, 255, 0.1);
+            cursor: pointer;
+        }
+
+        /* Dark mode: Adjust for better contrast with background image */
+        @media (prefers-color-scheme: dark) {
+            body {
+                color: #f0f0f0;
+            }
+
+            header, footer, section {
+                background: rgba(0, 0, 0, 0.8);
+                border-color: rgba(255, 255, 255, 0.1);
+            }
+
+            li {
+                background: rgba(0, 122, 255, 0.2);
+            }
+
+            h1, h2 {
+                color: #0a84ff;
+            }
+
+            nav a {
+                color: #0a84ff;
+                background: rgba(0, 122, 255, 0.05);
+            }
+
+            nav a:hover {
+                color: #0066cc;
+                background: rgba(0, 122, 255, 0.1);
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5em;
+            }
+
+            nav a {
+                margin: 0 10px;
+                padding: 6px 12px;
+                display: block;
+                margin-bottom: 10px;
+            }
+
+            section {
+                padding: 20px;
+            }
+
+            ul {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Style for rules list */
+        #rules ul {
+            display: block;
+            grid-template-columns: none;
+        }
+
+        #rules li {
+            text-align: left;
+            background: none;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 0;
+            width: auto;
+            max-width: none;
+        }
+
+        #rules li:last-child {
+            border-bottom: none;
+        }
+
+        #rules li:hover {
+            background: rgba(0, 122, 255, 0.05);
+            transform: translateY(-2px);
+            box-shadow: none;
+        }
+
+        /* Keyframe animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>CrystaltWorld</h1>
+        <p>Minecraft Server 1.21.1</p>
+        <nav>
+            <a href="#about">О сервере</a>
+            <a href="#rules">Правила сервера</a>
+            <a href="#allowed-mods">Разрешенные модификации</a>
+            <a href="#forbidden-mods">Запрещенные модификации</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="about">
+            <h2>О сервере</h2>
+            <p>Добро пожаловать на CrystaltWorld! Это увлекательный сервер Minecraft версии 1.21.1, где вы можете строить, исследовать и сражаться в кристальном мире. Мы предлагаем стабильный геймплей, дружеское сообщество и регулярные обновления.</p>
+            <p>IP: crystaltworld.minerent.io</p>
+            <p>Версия: 1.21.1</p>
+        </section>
+
+        <section id="rules">
+            <h2>Правила сервера</h2>
+            <p>Чтобы обеспечить приятную игру для всех, пожалуйста, соблюдайте следующие правила:</p>
+            <ul>
+                <li>Запрещено использование читов, хаков или любых модификаций, дающих несправедливое преимущество.</li>
+                <li>Уважайте других игроков: никаких оскорблений, спама или троллинга.</li>
+                <li>Не гриферить (разрушать) постройки других игроков без разрешения.</li>
+                <li>Запрещено распространение вредоносного ПО или ссылок на него.</li>
+                <li>Используйте только разрешенные модификации (см. раздел ниже).</li>
+                <li>Не рекламируйте другие серверы или ресурсы без разрешения администрации.</li>
+                <li>В случае нарушений возможен бан без предупреждения.</li>
+                <li>Администрация оставляет за собой право изменять правила в любое время.</li>
+            </ul>
+            <p>Если у вас есть вопросы, обращайтесь к модераторам.</p>
+        </section>
+
+        <section id="allowed-mods">
+            <h2>Разрешенные модификации</h2>
+            <ul>
+                <li>rct</li>
+                <li>PRIME PARTS</li>
+                <li>Chunks fade in</li>
+                <li>berdinskiybear's armor hud</li>
+                <li>AntiGhost</li>
+                <li>TopkaTags</li>
+                <li>ContainerSearcher</li>
+                <li>ItemLocks</li>
+                <li>Giselbaer's Durability Viewer</li>
+                <li>MiniHUD</li>
+                <li>TopkaHealth</li>
+                <li>ExitLag</li>
+                <li>Abstract</li>
+                <li>Custom FOV</li>
+                <li>Show Yourself</li>
+                <li>Jade</li>
+                <li>JJElytraSwap</li>
+                <li>InventoryCleaner</li>
+                <li>VisualRatio</li>
+                <li>AxolotlClient</li>
+                <li>ItemScroller</li>
+                <li>NoHurtCam</li>
+                <li>LavaClearWater</li>
+                <li>PulseVisuals</li>
+                <li>TopkaVisuals</li>
+                <li>PlasmaClient</li>
+                <li>SelectVisuals</li>
+                <li>ParadoxVisuals</li>
+                <li>WarpVisuals</li>
+                <li>CustomBlockOverlay</li>
+                <li>TrajectoryGuard</li>
+                <li>DarknessVisuals</li>
+                <li>PrimeVisuals</li>
+                <li>ViewModel-Changer</li>
+                <li>Do a Barrel Roll</li>
+                <li>ZetaVisuals</li>
+                <li>AgateVisuals</li>
+                <li>BaltikaVisuals</li>
+                <li>SiriusVisuals</li>
+                <li>SoupApi (SoupVisuals)</li>
+                <li>SpectraVisuals</li>
+                <li>SoupBetter</li>
+                <li>VurstVisuals</li>
+                <li>FlashVisual</li>
+                <li>AdaptiveVisuals</li>
+                <li>EnoughVisuals</li>
+                <li>TheCartel</li>
+            </ul>
+        </section>
+
+        <section id="forbidden-mods">
+            <h2>Запрещенные модификации</h2>
+            <p>На сервере запрещены любые модификации, которые дают несправедливое преимущество, такие как читы, X-ray, авто-кликеры и т.д. Конкретный список запрещенных модов:</p>
+            <ul>
+                <li>X-Ray</li>
+                <li>AutoClicker</li>
+                <li>Fly Hacks</li>
+                <li>Speed Hacks</li>
+                <li>Kill Aura</li>
+                <li>Any Cheat Clients (e.g., Wurst, Impact)</li>
+                <li>Radar Mods</li>
+                <li>ESP (Entity Scanner)</li>
+            </ul>
+            <p>Все остальные модификации, не указанные в разрешенных, считаются запрещенными. Нарушение правил приведет к бану.</p>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2026 CrystaltWorld. Все права защищены.
+    </footer>
+</body>
+</html>
